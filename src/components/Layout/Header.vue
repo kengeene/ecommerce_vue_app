@@ -1,6 +1,11 @@
 <template>
   <div id="default">
-    <SfHeader :logo="shopLogo" :title="shopName" active-icon="account">
+    <SfHeader
+      :logo="shopLogo"
+      :title="shopName"
+      active-icon="account"
+      @click:account="accountClick()"
+    >
       <template #navigation>
         <SfHeaderNavigationItem
           v-for="(category, key) in shopRootCategories"
@@ -43,6 +48,12 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    accountClick() {
+      console.log("tag account clicked", "");
+      this.$router.push({ name: "Profile" });
+    },
   },
 };
 </script>
