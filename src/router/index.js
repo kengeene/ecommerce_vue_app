@@ -20,6 +20,11 @@ const routes = [
         name: "Profile",
         component: () => import("../components/Profile.vue"),
       },
+      {
+        path: "/categories",
+        name: "Categories",
+        component: () => import("../components/Categories.vue"),
+      },
     ],
   },
 ];
