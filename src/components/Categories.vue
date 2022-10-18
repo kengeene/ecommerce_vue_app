@@ -100,30 +100,32 @@
           tag="div"
           class="products__grid"
         >
-          <SfProductCard
-            v-for="(product, i) in products"
-            :key="product.id"
-            :style="{ '--index': i }"
-            :colors="product.colors"
-            :title="product.title"
-            :image="product.image"
-            :image-height="326"
-            :image-width="216"
-            :regular-price="product.price.regular"
-            :special-price="product.price.special"
-            :max-rating="product.rating.max"
-            :score-rating="product.rating.score"
-            :is-in-wishlist="product.isInWishlist"
-            :show-add-to-cart-button="true"
-            image-tag="nuxt-img"
-            :nuxt-img-config="{
-              format: 'webp',
-              fit: 'cover',
-            }"
-            class="products__product-card"
-            @click:wishlist="toggleWishlist(i)"
-            @click:colors="handleSelectedColor($event, i)"
-          />
+          <div v-for="(product, i) in products" :key="product.id">
+            <ProductCard
+              :product="product"
+              :style="{ '--index': i }"
+              :colors="product.colors"
+              :title="product.title"
+              :image="product.image"
+              :image-height="326"
+              :image-width="216"
+              :regular-price="product.price.regular"
+              :special-price="product.price.special"
+              :max-rating="product.rating.max"
+              :score-rating="product.rating.score"
+              :is-in-wishlist="product.isInWishlist"
+              :show-add-to-cart-button="true"
+              image-tag="nuxt-img"
+              :nuxt-img-config="{
+                format: 'webp',
+                fit: 'cover',
+              }"
+              class="products__product-card"
+              @click:wishlist="toggleWishlist(i)"
+              @click:colors="handleSelectedColor($event, i)"
+              @click="clickedProduct(product.id)"
+            />
+          </div>
         </transition-group>
         <transition-group
           v-else
@@ -405,6 +407,8 @@
   </div>
 </template>
 <script>
+import ProductCard from "../components/Products/ProductCard.vue";
+
 import {
   SfHeading,
   SfSidebar,
@@ -413,7 +417,6 @@ import {
   SfIcon,
   SfMenuItem,
   SfFilter,
-  SfProductCard,
   SfProductCardHorizontal,
   SfPagination,
   SfAccordion,
@@ -427,13 +430,13 @@ import {
 export default {
   name: "Category",
   components: {
+    ProductCard,
     SfHeading,
     SfButton,
     SfSidebar,
     SfIcon,
     SfList,
     SfFilter,
-    SfProductCard,
     SfProductCardHorizontal,
     SfPagination,
     SfMenuItem,
@@ -861,6 +864,9 @@ export default {
     };
   },
   methods: {
+    clickedProduct(id) {
+      this.$router.push(`/product/${id}`);
+    },
     clearAllFilters() {
       const filters = Object.keys(this.filters);
       filters.forEach((name) => {

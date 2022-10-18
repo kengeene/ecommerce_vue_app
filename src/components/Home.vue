@@ -56,29 +56,7 @@
         :key="index"
         class="carousel__item"
       >
-        <SfProductCard
-          :image="product.image"
-          :colors="product.colors"
-          :title="product.title"
-          :regular-price="product.price.regular"
-          :special-price="product.price.special"
-          :score-rating="product.rating.score"
-          :max-rating="product.rating.max"
-          :is-in-wishlist="product.isInWishlist"
-          :show-add-to-cart-button="true"
-          :reviews-count="product.reviews"
-          :badge-label="product.badgeLabel"
-          :badge-color="product.badgeColor"
-          :image-width="216"
-          :image-height="326"
-          image-tag="nuxt-img"
-          :nuxt-img-config="{
-            format: 'webp',
-            fit: 'cover',
-          }"
-          @click:wishlist="toggleWishlist(index)"
-          @click:colors="handleSelectedColor($event, index)"
-        />
+        <ProductCard :product="product" />
       </SfCarouselItem>
     </SfCarousel>
     <SfSection
@@ -216,7 +194,6 @@ import {
   SfCallToAction,
   SfSection,
   SfCarousel,
-  SfProductCard,
   SfImage,
   SfHeading,
 } from "@storefront-ui/vue";
@@ -224,6 +201,7 @@ import {
 export default {
   name: "Home",
   components: {
+    ProductCard: () => import("../components/Products/ProductCard.vue"),
     SfButton,
     SfHero,
     SfBannerGrid,
@@ -231,7 +209,6 @@ export default {
     SfCallToAction,
     SfSection,
     SfCarousel,
-    SfProductCard,
     SfImage,
     SfHeading,
   },
@@ -551,17 +528,6 @@ export default {
         },
       ],
     };
-  },
-  methods: {
-    toggleWishlist(index) {
-      return (this.products[index].isInWishlist =
-        !this.products[index].isInWishlist);
-    },
-    handleSelectedColor(color, index) {
-      this.products[index].colors.map((el) => {
-        el.selected = el.label === color.label ? !el.selected : false;
-      });
-    },
   },
 };
 </script>
