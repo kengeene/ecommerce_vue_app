@@ -407,7 +407,7 @@
   </div>
 </template>
 <script>
-import ProductCard from "../components/Products/ProductCard.vue";
+import ProductCard from "@/components/Products/ProductCard.vue";
 
 import {
   SfHeading,

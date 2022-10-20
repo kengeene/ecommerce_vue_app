@@ -201,7 +201,7 @@ import {
 export default {
   name: "Home",
   components: {
-    ProductCard: () => import("../components/Products/ProductCard.vue"),
+    ProductCard: () => import("@/components/Products/ProductCard.vue"),
     SfButton,
     SfHero,
     SfBannerGrid,
