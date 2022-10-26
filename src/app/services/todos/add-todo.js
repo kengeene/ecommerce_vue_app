@@ -1,6 +1,6 @@
-export const makeAddToDo = ({toDORepository }) => {
+export const makeAddToDo = ({ todoRepository }) => {
   return async function () {
-    await toDORepository.create()
-    console.log('test');
+      let todo = {};
+      await todoRepository.createToDo(todo);
   };
 };
